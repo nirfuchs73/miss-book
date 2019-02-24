@@ -2,9 +2,9 @@ export default {
     props: ['book'],
     template: `
         <div class="book-card">
-            <h3>{{book.title}}</h3>
-            <h3>{{bookPrice}}</h3>
-            <!--<img v-bind:src="imgUrl" />-->
+            <h6>{{book.title}}</h6>
+            <h5>{{bookPrice}}</h5>
+            <img v-bind:src="imgUrl" />
         </div>
     `,
     methods: {

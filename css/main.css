@@ -8,18 +8,27 @@
     /* flex-basis: 200px; */
 }
 
+.book-card img {
+    width: 250px;
+}
+
 .book-card {
     background-color: lightgoldenrodyellow;
-    /* width: auto; */
-    width: 200px;
+    width: auto;
+    /* width: 200px; */
+    height: auto;
     margin: 5px;
     border: 1px solid green;
 }
 
 .red-bg {
-    background-color: red;
+    color: red;
 }
 
 .green-bg {
-    background-color: green;
+    color: green;
+}
+
+.show {
+    display: inline-block;
 }
