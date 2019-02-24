@@ -27,13 +27,12 @@ export default {
     },
 
     created() {
-        console.log(this.isMore);
-        // this.isMore = false;
+
     },
 
     watch: {
         txt: function () {
-            this.isMore = true
+            this.isMore = true;
         }
     }
 }

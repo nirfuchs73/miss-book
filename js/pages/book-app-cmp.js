@@ -1,8 +1,7 @@
 import bookService from '../services/book-service.js';
 import bookList from '../cmps/book-list-cmp.js';
 import bookDetails from '../cmps/book-details-cmp.js'
-
-// import carFilter from '../cmps/car-filter-cmp.js';
+import bookFilter from '../cmps/book-filter-cmp.js';
 
 export default {
     template: `
@@ -11,7 +10,7 @@ export default {
             <!--<car-filter @filtered="setFilter"></car-filter>-->
             <!--<car-list :cars="carsToShow"></car-list>-->
 
-            <!--<book-filter v-on:filtered="setFilter"></book-filter>-->
+            <book-filter v-on:filtered="setFilter"></book-filter>
             <book-list v-bind:books="booksToShow" v-on:selected="selectBook"></book-list>
             <book-details v-bind:book="selectedBook"></book-details>
         </section> 
@@ -20,10 +19,12 @@ export default {
         return {
             books: [],
             selectedBook: null,
-            filter: null
-            // filterBy: {
-            //     vendor : ''
-            // }
+            // filter: null,
+            filterBy: {
+                title: '',
+                fromPrice: 0,
+                toPrice: Infinity
+            }
         }
     },
     created() {
@@ -31,8 +32,8 @@ export default {
     },
     methods: {
         setFilter(filterBy) {
-            //     console.log('CarApp Got Filter: ', filterBy);
-            //     this.filterBy = filterBy;
+            console.log('BoookApp Got Filter: ', filterBy);
+            this.filterBy = filterBy;
         },
         selectBook(bookId) {
             this.selectedBook = bookService.getBookById(bookId);
@@ -42,15 +43,20 @@ export default {
     },
     computed: {
         booksToShow() {
-            // if (!this.filter) return this.books;
-            return this.books;
-            //     return this.cars.filter(car => car.vendor.includes(this.filterBy.vendor))
+            if (!this.filterBy.title &&
+                this.filterBy.fromPrice === 0 &&
+                this.filterBy.toPrice === Infinity) return this.books;
+            return this.books.filter(book => {
+                return book.title.includes(this.filterBy.title) &&
+                    book.listPrice.amount > this.filterBy.fromPrice &&
+                    book.listPrice.amount < this.filterBy.toPrice
+            })
         },
 
     },
     components: {
         bookList,
-        bookDetails
-        // bookFilter
+        bookDetails,
+        bookFilter
     }
 }
