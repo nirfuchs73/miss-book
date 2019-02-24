@@ -1,4 +1,4 @@
-// import bookPreview from './book-preview-cmp.js';
+import longText from './long-text-cmp.js';
 
 export default {
     props: ['book'],
@@ -10,6 +10,7 @@ export default {
             <h3>{{pageCount}}</h3>
             <h3>{{publishedDate}}</h3>
             <h3>{{onSale}}</h3>
+            <long-text v-bind:txt="book.description"></long-text>
         </section>
     `,
     data() {
@@ -48,6 +49,6 @@ export default {
     },
 
     components: {
-        // bookPreview
+        longText
     }
 }
