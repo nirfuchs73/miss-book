@@ -13,9 +13,9 @@ export default {
         bookPrice() {
             return `${this.book.listPrice.amount} ${this.book.listPrice.currencyCode}`;
         },
-        // imgUrl() {
-        //     // return `img/cars/${this.idx}.png`
-        //     return this.book.thumbnail;
-        // }
+        imgUrl() {
+            // return `img/cars/${this.idx}.png`
+            return this.book.thumbnail;
+        }
     }
 }

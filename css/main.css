@@ -5,13 +5,19 @@
 
 .book-list {
     flex-wrap: wrap;
-    flex-basis: 200px;
-    
+    /* flex-basis: 200px; */
 }
 
 .book-card {
-    background-color: lightblue;
+    background-color: lightgoldenrodyellow;
     width: 200px;
     margin: 5px;
     border: 1px solid green;
+}
+
+.red-bg {
+    background-color: red;
+}
+.green-bg{
+    background-color: green;
 }

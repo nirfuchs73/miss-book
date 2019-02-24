@@ -4,8 +4,9 @@
 
 export default {
     getBooks: getBooks,
+    getBookById: getBookById
     // addBook: addBook,
-    deleteBook: deleteBook,
+    // deleteBook: deleteBook,
     // updateBook: updateBook
 }
 var gBooks;
