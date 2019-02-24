@@ -3,20 +3,21 @@
 export default {
     props: ['book'],
     template: `
-        <section v-if="book" class="book-details">       
-            <!--<h1>Book details</h1>-->
-            <!--<h1>THIS IS TITLE {{book.title}}</h1>-->
+        <section v-if="book" class="book-details" v-bind:class="{'red-bg': book.listPrice.amount > 150, 'green-bg': book.listPrice.amount < 20}">
             <li v-for="(value, key) in book">
                 {{ key }}:{{ value }}
             </li>
             <h3>{{pageCount}}</h3>
             <h3>{{publishedDate}}</h3>
-            
-            <!--<div v-for="(value, key) in book">
-                {{ key }}: {{ value }}
-            </div>-->
+            <h3>{{onSale}}</h3>
         </section>
     `,
+    data() {
+        return {
+            // bookPrice : this.book.listPrice.amount
+            // isExpensive: true
+        }
+    },
     methods: {
         // selectBook(book) {
         //     this.$emit('selected', book.id);
@@ -27,6 +28,7 @@ export default {
             if (this.book.pageCount > 500) return 'Long reading';
             if (this.book.pageCount > 200) return 'Decent Reading';
             if (this.book.pageCount < 100) return 'Light Reading';
+            return 'Regular Reading';
 
         },
         publishedDate() {
@@ -37,14 +39,8 @@ export default {
             return 'Less than 10 years book';
 
         },
-        showTitle() {
-            return this.book.title;
-        },
-        showAuthors() {
-            return this.book.authors.join('-');
-        },
-        price() {
-
+        onSale() {
+            if (this.book.listPrice.isOnSale) return 'On sale!!!';
         }
     },
     created() {
