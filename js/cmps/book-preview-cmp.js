@@ -3,7 +3,7 @@ export default {
     template: `
         <div class="book-card">
             <h6>{{book.title}}</h6>
-            <h5>{{bookPrice}}</h5>
+            <h6>{{bookPrice}}</h6>
             <img v-bind:src="imgUrl" />
         </div>
     `,
