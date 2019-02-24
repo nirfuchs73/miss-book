@@ -2,17 +2,17 @@ export default {
     props: ['txt'],
     template: `
         <div v-if="txt" class="long-text">
-            <p v-if="!isMore">{{showLess}}
+            <p v-if="isMore">{{showLess}}
                 <a v-on:click="togglesText" href="javascript:void(0);">See More</a>
             </p>
-            <p v-else-if="isMore">{{txt}}
+            <p v-else-if="!isMore">{{txt}}
                 <a v-on:click="togglesText" href="javascript:void(0);">See Less</a>
             </p>
         </div>
     `,
     data() {
         return {
-            isMore: false
+            isMore: true
         }
     },
     methods: {
@@ -33,7 +33,7 @@ export default {
 
     watch: {
         txt: function () {
-            this.isMore = false
+            this.isMore = true
         }
     }
 }
