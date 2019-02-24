@@ -1,0 +1,17 @@
+.flex {
+    display: flex;
+    /* flex-direction: column; */
+}
+
+.book-list {
+    flex-wrap: wrap;
+    flex-basis: 200px;
+    
+}
+
+.book-card {
+    background-color: lightblue;
+    width: 200px;
+    margin: 5px;
+    border: 1px solid green;
+}

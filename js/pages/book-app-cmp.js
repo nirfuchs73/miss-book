@@ -1,5 +1,5 @@
 import bookService from '../services/book-service.js';
-// import carList from '../cmps/car-list-cmp.js';
+import bookList from '../cmps/book-list-cmp.js';
 // import carFilter from '../cmps/car-filter-cmp.js';
 
 export default {
@@ -9,9 +9,9 @@ export default {
             <!--<car-filter @filtered="setFilter"></car-filter>-->
             <!--<car-list :cars="carsToShow"></car-list>-->
 
-            <book-filter v-on:filtered="setFilter"></book-filter>
+            <!--<book-filter v-on:filtered="setFilter"></book-filter>-->
             <book-list v-bind:books="booksToShow" v-on:selected="selectBook"></book-list>
-            <book-details v-bind:book="selectedBook"></book-details>
+            <!--<book-details v-bind:book="selectedBook"></book-details>-->
         </section> 
     `,
     data() {
@@ -28,18 +28,23 @@ export default {
     },
     methods: {
         setFilter(filterBy) {
-        //     console.log('CarApp Got Filter: ', filterBy);
-        //     this.filterBy = filterBy;
+            //     console.log('CarApp Got Filter: ', filterBy);
+            //     this.filterBy = filterBy;
+        },
+        selectBook(bookId) {
+            console.log(bookId);
+
         }
     },
     computed: {
         booksToShow() {
-            //     // if (!this.filter.byVendor) return this.cars;
+            // if (!this.filter) return this.books;
+            return this.books;
             //     return this.cars.filter(car => car.vendor.includes(this.filterBy.vendor))
         }
     },
     components: {
-        // carList,
-        // carFilter
+        bookList
+        // bookFilter
     }
 }

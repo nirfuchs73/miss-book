@@ -1,17 +1,21 @@
 export default {
     props: ['book'],
     template: `
-         <li>
+        <div class="book-card">
             <h3>{{book.title}}</h3>
-            <img v-bind:src="imgUrl" />
-        </li>
+            <h3>{{bookPrice}}</h3>
+            <!--<img v-bind:src="imgUrl" />-->
+        </div>
     `,
     methods: {
     },
     computed: {
-        imgUrl() {
-            // return `img/cars/${this.idx}.png`
-            return this.book.thumbnail;
-        }
+        bookPrice() {
+            return `${this.book.listPrice.amount} ${this.book.listPrice.currencyCode}`;
+        },
+        // imgUrl() {
+        //     // return `img/cars/${this.idx}.png`
+        //     return this.book.thumbnail;
+        // }
     }
 }
