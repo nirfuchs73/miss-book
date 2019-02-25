@@ -46,6 +46,13 @@ function getBookById(bookId) {
 //     return Promise.resolve(book);
 // }
 
+function addReview(bookId, review) {
+    var book = gBooks.find(book => book.id === bookId);
+    book.reviews.push(review);
+    storageService.store(BOOKS_KEY, gBooks);
+    return Promise.resolve(book);
+}
+
 
 function _createBooks() {
     gBooks = storageService.load(BOOKS_KEY);

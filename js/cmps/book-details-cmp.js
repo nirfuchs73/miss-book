@@ -12,12 +12,29 @@ export default {
             <h4 slot="body" v-bind:class="classObject">{{bookPrice}}</h4>
             <h4 slot="body">{{onSale}}</h4>
             <long-text slot="body" v-bind:txt="book.description"></long-text>
+            <form slot="body">
+                <!--<pre>-->
+Enter Review:<br>
+Full name: <input type="text" placeholder="Full name" v-model="fullName" ref="fullName"/><br>
+Stars:<select>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+</select><br>
+Read at: <input type="date"><br>
+Free Text:<br>
+<textarea name="" id="" cols="30" rows="5"></textarea>
+                <!--</pre>-->
+            </form>
         </modal>
     `,
     data() {
         return {
             isShowModal: false,
-            book: null
+            book: null,
+            fullName: 'Books Reader'
         }
     },
     methods: {
@@ -66,6 +83,19 @@ export default {
         bookService.getBookById(bookId)
             .then(book => this.book = book);
     },
+    updated() {
+        // console.log('REFS:', this.$refs);
+        if (this.$refs.fullName !== undefined) {
+            this.$refs.fullName.focus();
+        }
+    },
+    // NOT WORKING
+    // mounted() {
+    //     // console.log('REFS:', this.$refs);
+    //     if (this.$refs.fullName !== undefined) {
+    //         this.$refs.fullName.focus();
+    //     }
+    // },
     watch: {
         book: function () {
             this.isShowModal = true;
