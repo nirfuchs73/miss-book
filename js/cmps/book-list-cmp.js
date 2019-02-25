@@ -4,18 +4,9 @@ export default {
     props: ['books'],
     template: `
         <section>
-
-            <!--<li :key="currCar.id" v-for="(currCar, idx) in cars">
-                <router-link :to="'/car/' + currCar.id">
-                    <car-preview :car="currCar" :idx="idx+1">
-                    </car-preview>
-                </router-link>
-                <button @click="emitDeleted(currCar.id)">x</button>
-            </li>-->
             <!--<h1>Book List</h1>-->
-
-            <div v-for="(currBook, idx) in books" :key="currBook.id">
-                <router-link class="book-list flex" :to="'/books/' + currBook.id">
+            <div class="book-list flex">
+                <router-link v-for="(currBook, idx) in books" :key="currBook.id" :to="'/books/' + currBook.id">
                     <book-preview v-bind:book="currBook">
                     </book-preview>
                 </router-link>

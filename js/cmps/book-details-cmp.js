@@ -5,7 +5,7 @@ import bookService from '../services/book-service.js';
 export default {
     // props: ['book'],
     template: `
-        <modal v-if="book" v-show="isShowModal" @close="isShowModal = false">
+        <modal v-if="book" v-show="isShowModal" v-on:close="onCloseModal">
             <h4 slot="header">{{book.title}}</h4>
             <h4 slot="body">{{pageCount}}</h4>
             <h4 slot="body">{{publishedDate}}</h4>
@@ -25,7 +25,9 @@ export default {
         //     this.$emit('selected', book.id);
         // }
         onCloseModal() {
+            // console.log('onCloseModal');
             this.isShowModal = false;
+            this.$router.push('/books');
         }
     },
     computed: {
@@ -60,7 +62,6 @@ export default {
     created() {
         // console.log('book is', this.book);
         // console.log(this.$route.params);
-        console.log(this.$route.params);
         const bookId = this.$route.params.bookId;
         bookService.getBookById(bookId)
             .then(book => this.book = book);

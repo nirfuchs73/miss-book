@@ -4,7 +4,7 @@ export default {
         <div class="book-card">
             <h6>{{book.title}}</h6>
             <h6>{{bookPrice}}</h6>
-            <!--<img v-bind:src="imgUrl" />-->
+            <img v-bind:src="imgUrl" />
         </div>
     `,
     methods: {
