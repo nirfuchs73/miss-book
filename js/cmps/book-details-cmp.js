@@ -8,7 +8,7 @@ export default {
             <h4 slot="header">{{book.title}}</h4>
             <h4 slot="body">{{pageCount}}</h4>
             <h4 slot="body">{{publishedDate}}</h4>
-            <h4 slot="body" v-bind:class="{'red-bg': book.listPrice.amount > 150, 'green-bg': book.listPrice.amount < 20}">{{bookPrice}}</h4>
+            <h4 slot="body" v-bind:class="classObject">{{bookPrice}}</h4>
             <h4 slot="body">{{onSale}}</h4>
             <long-text slot="body" v-bind:txt="book.description"></long-text>
         </modal>
@@ -47,6 +47,12 @@ export default {
         },
         onSale() {
             if (this.book.listPrice.isOnSale) return 'On sale!!!';
+        },
+        classObject() {
+            return {
+                'red-bg': this.book.listPrice.amount > 150,
+                'green-bg': this.book.listPrice.amount < 20
+            }
         }
     },
     created() {
