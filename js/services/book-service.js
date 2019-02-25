@@ -1,6 +1,6 @@
+import storageService from './storage-service.js'
 
-// import { getRandomIntInclusive, makeId } from './util-service.js'
-// import utilService from './util-service.js'
+const BOOKS_KEY = 'books';
 
 export default {
     getBooks: getBooks,
@@ -14,33 +14,43 @@ var gBooks;
 _createBooks();
 
 function getBooks() {
-    return gBooks
+    return Promise.resolve(gBooks);
 }
 
 function deleteBook(bookId) {
     var bookIdx = gBooks.findIndex(book => bookId === book.id)
     gBooks.splice(bookIdx, 1);
+    storageService.store(BOOKS_KEY, gBooks);
+    return Promise.resolve();
 }
 
 // function addBook(vendor) {
-//     var book = _createBook(vendor)
-//     gBooks.push(book)
+//     var book = _createBook(vendor);
+//     gBooks.push(book);
+//     storageService.store(BOOKS_KEY, gBooks);
+//     return Promise.resolve(book)
 // }
 
 function getBookById(bookId) {
     var book = gBooks.find(function (book) {
         return bookId === book.id
     })
-    return book
+    return Promise.resolve(book);
 }
 
 // function updateBook(bookId, newSpeed) {
 //     var book = gBooks.find(book => book.id === bookId)
 //     book.maxSpeed = newSpeed;
+//     storageService.store(BOOKS_KEY, gBooks);
+
+//     return Promise.resolve(book);
 // }
 
 
 function _createBooks() {
+    gBooks = storageService.load(BOOKS_KEY);
+    if (gBooks && gBooks.length) return;
+
     var books = [
         {
             "id": "OXeMG8wNskc",
@@ -484,6 +494,7 @@ function _createBooks() {
         }
     ];
 
+    storageService.store(BOOKS_KEY, books);
     gBooks = books;
 }
 

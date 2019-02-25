@@ -25,7 +25,8 @@ export default {
         }
     },
     created() {
-        this.books = bookService.getBooks();
+        bookService.getBooks()
+            .then(books => this.books = books);
     },
     methods: {
         setFilter(filterBy) {
@@ -33,9 +34,9 @@ export default {
             this.filterBy = filterBy;
         },
         selectBook(bookId) {
-            this.selectedBook = bookService.getBookById(bookId);
+            bookService.getBookById(bookId)
+                .then(book => this.selectedBook = book);
             // console.log(this.selectedBook);
-
         },
     },
     computed: {
