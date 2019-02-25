@@ -5,11 +5,12 @@ export default {
     props: ['book'],
     template: `
         <modal v-if="book" v-show="isShowModal" @close="isShowModal = false">
-            <h3 slot="header">{{book.title}}</h3>
-            <h3 slot="body">{{pageCount}}</h3>
-            <h3 slot="body">{{publishedDate}}</h3>
-            <h3 slot="body" v-bind:class="{'red-bg': book.listPrice.amount > 150, 'green-bg': book.listPrice.amount < 20}">{{bookPrice}}</h3>
-            <h3 slot="body">{{onSale}}</h3>
+            <h4 slot="header">{{book.title}}</h4>
+            <h4 slot="body">{{pageCount}}</h4>
+            <h4 slot="body">{{publishedDate}}</h4>
+            <h4 slot="body" v-bind:class="{'red-bg': book.listPrice.amount > 150, 'green-bg': book.listPrice.amount < 20}">{{bookPrice}}</h4>
+            <h4 slot="body">{{onSale}}</h4>
+            <long-text slot="body" v-bind:txt="book.description"></long-text>
         </modal>
     `,
     data() {
