@@ -7,9 +7,6 @@ export default {
     template: `
         <section class="book-app">
             <h1>Book App</h1>
-            <!--<car-filter @filtered="setFilter"></car-filter>-->
-            <!--<car-list :cars="carsToShow"></car-list>-->
-
             <book-filter v-on:filtered="setFilter"></book-filter>
             <book-list v-bind:books="booksToShow" v-on:selected="selectBook"></book-list>
             <book-details v-bind:book="selectedBook"></book-details>
