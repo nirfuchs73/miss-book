@@ -1,8 +1,9 @@
 import longText from './long-text-cmp.js';
 import modal from './modal-cmp.js';
+import bookService from '../services/book-service.js';
 
 export default {
-    props: ['book'],
+    // props: ['book'],
     template: `
         <modal v-if="book" v-show="isShowModal" @close="isShowModal = false">
             <h4 slot="header">{{book.title}}</h4>
@@ -15,7 +16,8 @@ export default {
     `,
     data() {
         return {
-            isShowModal: false
+            isShowModal: false,
+            book: null
         }
     },
     methods: {
@@ -56,7 +58,12 @@ export default {
         }
     },
     created() {
-        console.log('book is', this.book);
+        // console.log('book is', this.book);
+        // console.log(this.$route.params);
+        console.log(this.$route.params);
+        const bookId = this.$route.params.bookId;
+        bookService.getBookById(bookId)
+            .then(book => this.book = book);
     },
     watch: {
         book: function () {

@@ -34,9 +34,9 @@ export default {
             this.filterBy = filterBy;
         },
         selectBook(bookId) {
+            console.log(bookId);
             bookService.getBookById(bookId)
                 .then(book => this.selectedBook = book);
-            // console.log(this.selectedBook);
         },
     },
     computed: {
