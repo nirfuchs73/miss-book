@@ -9,8 +9,11 @@ var gBooks;
 
 _createBooks();
 
-function getBooks() {
-    return Promise.resolve(gBooks);
+function getBooks(searchTxt) {
+    // return Promise.resolve(gBooks);
+    var api = `https://www.googleapis.com/books/v1/volumes?printType=books&q=${searchTxt}`;
+
+    return axios.get(api).then(res => res.data);
 }
 
 function _createBooks() {

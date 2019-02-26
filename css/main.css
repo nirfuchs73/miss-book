@@ -43,4 +43,11 @@ footer {
 
 .book-add {
     flex-direction: column;
+    margin: 10px;
+}
+
+.book-add table {
+    /* table-layout: auto; */
+    /* width: 400px; */
+    width: fit-content;
 }

@@ -43,34 +43,73 @@ function addGoogleBook(googleBook) {
 }
 
 function _convertGoogleBook(googleBook) {
-    var res = {
-        id: googleBook.id,
-        title: googleBook.volumeInfo.title,
-        subtitle: googleBook.volumeInfo.subtitle,
-        authors: googleBook.volumeInfo.authors,
-        publishedDate: googleBook.volumeInfo.publishedDate,
-        description: googleBook.volumeInfo.description,
-        pageCount: googleBook.volumeInfo.pageCount,
-        categories: googleBook.volumeInfo.categories,
-        // thumbnail: googleBook.volumeInfo.imageLinks.smallThumbnail,
-        language: googleBook.volumeInfo.language,
-        // listPrice: googleBook.saleInfo.listPrice,
+    var book = _createBook();
+    if (googleBook.id) book.id = googleBook.id;
+    if (googleBook.volumeInfo.title) book.title = googleBook.volumeInfo.title;
+    if (googleBook.volumeInfo.subtitle) book.subtitle = googleBook.volumeInfo.subtitle;
+    if (googleBook.volumeInfo.authors) book.authors = googleBook.volumeInfo.authors;
+    if (googleBook.volumeInfo.publishedDate) book.publishedDate = googleBook.volumeInfo.publishedDate;
+    if (googleBook.volumeInfo.description) book.description = googleBook.volumeInfo.description;
+    if (googleBook.volumeInfo.pageCount) book.pageCount = googleBook.volumeInfo.pageCount;
+    if (googleBook.volumeInfo.categories) book.categories = googleBook.volumeInfo.categories;
+    if (googleBook.volumeInfo.imageLinks) {
+        if (googleBook.volumeInfo.imageLinks.smallThumbnail)
+            book.thumbnail = googleBook.volumeInfo.imageLinks.smallThumbnail;
+    }
+    if (googleBook.volumeInfo.language) book.language = googleBook.volumeInfo.language;
+    if (googleBook.saleInfo.listPrice) book.listPrice = googleBook.saleInfo.listPrice;
+
+    // var book = {
+    //     // id: googleBook.id,
+    //     // title: googleBook.volumeInfo.title,
+    //     // subtitle: googleBook.volumeInfo.subtitle,
+    //     // authors: googleBook.volumeInfo.authors,
+    //     // publishedDate: googleBook.volumeInfo.publishedDate,
+    //     // description: googleBook.volumeInfo.description,
+    //     // pageCount: googleBook.volumeInfo.pageCount,
+    //     // categories: googleBook.volumeInfo.categories,
+    //     // thumbnail: googleBook.volumeInfo.imageLinks.smallThumbnail,
+    //     // language: googleBook.volumeInfo.language,
+    //     // listPrice: googleBook.saleInfo.listPrice,
+    //     // reviews: []
+    // };
+    // if (googleBook.volumeInfo.imageLinks) {
+    //     book.thumbnail = googleBook.volumeInfo.imageLinks.smallThumbnail;
+    // } else {
+    //     book.thumbnail = googleBook.volumeInfo.previewLink;
+    // }
+
+    // if (googleBook.saleInfo.listPrice) {
+    //     book.listPrice = googleBook.saleInfo.listPrice;
+    //     book.listPrice.isOnSale = false;
+    // } else {
+    //     book.listPrice = { amount: 0, currencyCode: '', isOnSale: false };
+    // }
+
+    return book;
+}
+
+function _createBook() {
+    var book = {
+        id: '',
+        title: '',
+        subtitle: '',
+        authors: [],
+        publishedDate: 0,
+        description: '',
+        pageCount: 0,
+        categories: [],
+        thumbnail: 'https://www.coding-academy.org/books-photos/2.jpg',
+        language: '',
+        listPrice: {
+            amount: 0,
+            currencyCode: '',
+            isOnSale: false
+        },
         reviews: []
     };
-    if (googleBook.volumeInfo.imageLinks) {
-        res.thumbnail = googleBook.volumeInfo.imageLinks.smallThumbnail;
-    } else {
-        res.thumbnail = googleBook.volumeInfo.previewLink;
-    }
 
-    if (googleBook.saleInfo.listPrice) {
-        res.listPrice = googleBook.saleInfo.listPrice;
-        res.listPrice.isOnSale = false;
-    } else {
-        res.listPrice = { amount: 0, currencyCode: '', isOnSale: false };
-    }
-
-    return res;
+    return book;
 }
 
 function getBookById(bookId) {
@@ -578,10 +617,3 @@ function _createBooks() {
     gBooks = books;
 }
 
-// function _createBook(vendor) {
-//     return {
-//         id: makeId(),
-//         vendor: vendor,
-//         maxSpeed: getRandomIntInclusive(1, 200)
-//     }
-// }
