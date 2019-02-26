@@ -15,7 +15,8 @@
 .book-card {
     background-color: lightgoldenrodyellow;
     width: auto;
-    /* width: 200px; */
+    /* width: 300px; */
+    max-width: 250px;
     height: auto;
     margin: 5px;
     border: 1px solid green;
@@ -33,13 +34,13 @@
     display: inline-block;
 }
 
-footer{
+footer {
     position: fixed;
     bottom: 0;
     /* width: 100%; */
     /* font-weight: bold; */
 }
 
-.book-add{
+.book-add {
     flex-direction: column;
 }

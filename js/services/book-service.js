@@ -6,7 +6,8 @@ export default {
     getBookById: getBookById,
     addReview: addReview,
     deleteBook: deleteBook,
-    deleteReview: deleteReview
+    deleteReview: deleteReview,
+    addGoogleBook: addGoogleBook
     // addBook: addBook,
     // updateBook: updateBook
 }
@@ -31,6 +32,46 @@ function deleteBook(bookId) {
 //     storageService.store(BOOKS_KEY, gBooks);
 //     return Promise.resolve(book)
 // }
+
+function addGoogleBook(googleBook) {
+    var isBookExist = gBooks.some(book => book.id === googleBook.id);
+    if (isBookExist) return Promise.reject('Book alreay exist');
+    var book = _convertGoogleBook(googleBook);
+    gBooks.push(book);
+    storageService.store(BOOKS_KEY, gBooks);
+    return Promise.resolve(book);
+}
+
+function _convertGoogleBook(googleBook) {
+    var res = {
+        id: googleBook.id,
+        title: googleBook.volumeInfo.title,
+        subtitle: googleBook.volumeInfo.subtitle,
+        authors: googleBook.volumeInfo.authors,
+        publishedDate: googleBook.volumeInfo.publishedDate,
+        description: googleBook.volumeInfo.description,
+        pageCount: googleBook.volumeInfo.pageCount,
+        categories: googleBook.volumeInfo.categories,
+        // thumbnail: googleBook.volumeInfo.imageLinks.smallThumbnail,
+        language: googleBook.volumeInfo.language,
+        // listPrice: googleBook.saleInfo.listPrice,
+        reviews: []
+    };
+    if (googleBook.volumeInfo.imageLinks) {
+        res.thumbnail = googleBook.volumeInfo.imageLinks.smallThumbnail;
+    } else {
+        res.thumbnail = googleBook.volumeInfo.previewLink;
+    }
+
+    if (googleBook.saleInfo.listPrice) {
+        res.listPrice = googleBook.saleInfo.listPrice;
+        res.listPrice.isOnSale = false;
+    } else {
+        res.listPrice = { amount: 0, currencyCode: '', isOnSale: false };
+    }
+
+    return res;
+}
 
 function getBookById(bookId) {
     var book = gBooks.find(function (book) {

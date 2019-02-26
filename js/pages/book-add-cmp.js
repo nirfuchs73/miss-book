@@ -1,4 +1,5 @@
 import googleBookService from '../services/google-book-service.js';
+import bookService from '../services/book-service.js';
 
 export default {
     // props: ['reviews'],
@@ -7,11 +8,9 @@ export default {
         <div>
             Add Book: <input type="text" placeholder="Search for a book" v-model="title"/>
         </div>
-        <!--{{booksToShow}}-->
         <ul>
-            <li v-for="book in booksToShow">{{book.volumeInfo.title}} <button v-on:click="onAddBook(book.id)">+</button></li>
+            <li v-for="book in booksToShow">{{book.volumeInfo.title}} <button v-on:click="onAddBook(book)">+</button></li>
         </ul>
-        <!--{{books[0].volumeInfo.title}}-->
     </section>
     `,
     data() {
@@ -23,8 +22,14 @@ export default {
     methods: {
         onAddBook(book) {
             console.log(book);
+            bookService.addGoogleBook(book)
+                .then((res) => {
+                    console.log(res);
+                    console.log('Google book was added');
+                }).catch((res) => {
+                    console.log(res);
+                });
         }
-
     },
     computed: {
         booksToShow() {
@@ -41,6 +46,7 @@ export default {
 
     },
     components: {
-        googleBookService
+        googleBookService,
+        bookService
     }
 }
