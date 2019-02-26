@@ -14,8 +14,8 @@ export default {
             <h6 slot="body" v-bind:class="classObject">{{bookPrice}}</h6>
             <h6 slot="body">{{onSale}}</h6>
             <long-text slot="body" v-bind:txt="book.description"></long-text>
-            <review-display slot="body" v-bind:reviews="book.reviews" v-on:delete="deleteReview"></review-display>
-            <review-add slot="body" v-on:reviewed="saveReview"></review-add>
+            <review-display slot="body" v-bind:reviews="book.reviews" v-on:delete="onDeleteReview"></review-display>
+            <review-add slot="body" v-on:reviewed="onSaveReview"></review-add>
         </modal>
     `,
     data() {
@@ -33,16 +33,17 @@ export default {
             this.isShowModal = false;
             this.$router.push('/books');
         },
-        deleteReview(reviewId) {
+        onDeleteReview(reviewId) {
             // console.log('deleteReview');
+            // console.log(reviewId);
             bookService.deleteReview(this.book.id, reviewId)
                 .then(() => {
                     console.log('Review was deleted');
                 });
         },
-        saveReview(review) {
+        onSaveReview(review) {
             // console.log('saveReview');
-            console.log(review);
+            // console.log(review);
             bookService.addReview(this.book.id, review)
                 .then(() => {
                     console.log('Review was added');

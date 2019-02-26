@@ -34,8 +34,8 @@ export default {
 
     },
     created() {
-        console.log('reviews created');
-        console.log(this.reviews);
+        // console.log('reviews created');
+        // console.log(this.reviews);
 
     }
 }
