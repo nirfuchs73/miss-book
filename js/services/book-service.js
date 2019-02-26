@@ -5,9 +5,10 @@ const BOOKS_KEY = 'books';
 export default {
     getBooks: getBooks,
     getBookById: getBookById,
-    addReview: addReview
+    addReview: addReview,
+    deleteBook: deleteBook,
+    deleteReview: deleteReview
     // addBook: addBook,
-    // deleteBook: deleteBook,
     // updateBook: updateBook
 }
 var gBooks;
@@ -19,7 +20,7 @@ function getBooks() {
 }
 
 function deleteBook(bookId) {
-    var bookIdx = gBooks.findIndex(book => bookId === book.id)
+    var bookIdx = gBooks.findIndex(book => bookId === book.id);
     gBooks.splice(bookIdx, 1);
     storageService.store(BOOKS_KEY, gBooks);
     return Promise.resolve();
@@ -52,10 +53,17 @@ function addReview(bookId, review) {
     if (!book['reviews']) {
         book['reviews'] = [review];
     } else {
-        book['review'].push(review);
+        book['reviews'].push(review);
     }
     storageService.store(BOOKS_KEY, gBooks);
     return Promise.resolve(book);
+}
+
+function deleteReview(bookId,reviewIdx) {
+    var book = gBooks.find(book => book.id === bookId);
+    book['reviews'].splice(reviewIdx, 1);
+    storageService.store(BOOKS_KEY, gBooks);
+    return Promise.resolve();
 }
 
 

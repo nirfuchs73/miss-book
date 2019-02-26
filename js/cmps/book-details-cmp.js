@@ -2,17 +2,19 @@ import longText from './long-text-cmp.js';
 import modal from './modal-cmp.js';
 import bookService from '../services/book-service.js';
 import reviewAdd from '../cmps/review-add-cmp.js';
+import reviewDisplay from '../cmps/review-display-cmp.js';
 
 export default {
     // props: ['book'],
     template: `
         <modal v-if="book" v-show="isShowModal" v-on:close="onCloseModal">
-            <h6 slot="header">{{book.title}}</h6>
+            <h6 slot="body">{{book.title}}</h6>
             <h6 slot="body">{{pageCount}}</h6>
             <h6 slot="body">{{publishedDate}}</h6>
             <h6 slot="body" v-bind:class="classObject">{{bookPrice}}</h6>
             <h6 slot="body">{{onSale}}</h6>
             <long-text slot="body" v-bind:txt="book.description"></long-text>
+            <review-display slot="body" v-bind:reviews="book.reviews" v-on:delete="deleteReview"></review-display>
             <review-add slot="body" v-on:reviewed="saveReview"></review-add>
         </modal>
     `,
@@ -30,6 +32,13 @@ export default {
             // console.log('onCloseModal');
             this.isShowModal = false;
             this.$router.push('/books');
+        },
+        deleteReview(reviewId) {
+            // console.log('deleteReview');
+            bookService.deleteReview(this.book.id, reviewId)
+                .then(() => {
+                    console.log('Review was deleted');
+                });
         },
         saveReview(review) {
             // console.log('saveReview');
@@ -68,7 +77,7 @@ export default {
                 'red-bg': this.book.listPrice.amount > 150,
                 'green-bg': this.book.listPrice.amount < 20
             }
-        }
+        },
     },
     created() {
         // console.log('book is', this.book);
@@ -99,6 +108,7 @@ export default {
     components: {
         longText,
         modal,
-        reviewAdd
+        reviewAdd,
+        reviewDisplay
     }
 }

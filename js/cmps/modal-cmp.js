@@ -5,19 +5,20 @@ export default {
         <div class="modal-mask">
             <div class="modal-wrapper">
                 <div class="modal-container">
-                    <div class="modal-header">
+                    <button class="modal-default-button" v-on:click="emitClose">x</button>
+                    <!--<div class="modal-header">
                         <slot name="header">
                         </slot>
-                    </div>
+                    </div>-->
                     <div class="modal-body">
                         <slot name="body">
                         </slot>
                     </div>
-                    <div class="modal-footer">
+                    <!--<div class="modal-footer">
                         <slot name="footer">
                             <button class="modal-default-button" v-on:click="emitClose">Close</button>
                         </slot>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>

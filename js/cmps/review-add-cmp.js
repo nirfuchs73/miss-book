@@ -13,7 +13,7 @@ export default {
                 <tr>
                     <td>Stars:</td>
                     <td>
-                        <select ref="stars" v-model="review.stars">
+                        <select v-model="review.stars">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -24,11 +24,11 @@ export default {
                 </tr>
                 <tr>
                     <td>Read at:</td>
-                    <td><input type="date" ref="readAt" v-model="review.readAt"></td>
+                    <td><input type="date" v-model="review.readAt"></td>
                 </tr>
                 <tr>
                     <td>Free Text:</td>
-                    <td><textarea name="" id="" cols="30" rows="3" ref="freeText" v-model="review.freeText"></textarea></td>
+                    <td><textarea name="" id="" cols="30" rows="3" v-model="review.freeText"></textarea></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -56,7 +56,7 @@ export default {
         }
     },
     mounted() {
-        console.log('REFS:', this.$refs);
+        // console.log('REFS:', this.$refs);
         if (this.$refs.fullName !== undefined) {
             this.$refs.fullName.focus();
         }
