@@ -1,5 +1,4 @@
-import storageService from './storage-service.js'
-
+import storageService from './storage-service.js';
 const BOOKS_KEY = 'books';
 
 export default {

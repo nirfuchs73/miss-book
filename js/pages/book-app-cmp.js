@@ -2,11 +2,13 @@ import bookService from '../services/book-service.js';
 import bookList from '../cmps/book-list-cmp.js';
 import bookDetails from '../cmps/book-details-cmp.js'
 import bookFilter from '../cmps/book-filter-cmp.js';
+import bookAdd from '../pages/book-add-cmp.js';
 
 export default {
     template: `
         <section class="book-app">
             <h1>Book App</h1>
+            <!--<book-add></book-add>-->
             <book-filter v-on:filtered="setFilter"></book-filter>
             <book-list v-bind:books="booksToShow"></book-list>
             <!--<book-details v-bind:book="selectedBook"></book-details>-->
@@ -55,6 +57,7 @@ export default {
     components: {
         bookList,
         bookDetails,
-        bookFilter
+        bookFilter,
+        bookAdd
     }
 }
