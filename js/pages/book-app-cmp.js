@@ -8,14 +8,14 @@ export default {
         <section class="book-app">
             <h1>Book App</h1>
             <book-filter v-on:filtered="setFilter"></book-filter>
-            <book-list v-bind:books="booksToShow" v-on:selected="selectBook"></book-list>
-            <book-details v-bind:book="selectedBook"></book-details>
+            <book-list v-bind:books="booksToShow"></book-list>
+            <!--<book-details v-bind:book="selectedBook"></book-details>-->
         </section> 
     `,
     data() {
         return {
             books: [],
-            selectedBook: null,
+            // selectedBook: null,
             // filter: null,
             filterBy: {
                 title: '',
@@ -33,11 +33,11 @@ export default {
             console.log('BoookApp Got Filter: ', filterBy);
             this.filterBy = filterBy;
         },
-        selectBook(bookId) {
-            console.log(bookId);
-            bookService.getBookById(bookId)
-                .then(book => this.selectedBook = book);
-        },
+        // selectBook(bookId) {
+        //     console.log(bookId);
+        //     bookService.getBookById(bookId)
+        //         .then(book => this.selectedBook = book);
+        // },
     },
     computed: {
         booksToShow() {

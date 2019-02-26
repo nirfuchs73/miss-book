@@ -4,7 +4,8 @@ const BOOKS_KEY = 'books';
 
 export default {
     getBooks: getBooks,
-    getBookById: getBookById
+    getBookById: getBookById,
+    addReview: addReview
     // addBook: addBook,
     // deleteBook: deleteBook,
     // updateBook: updateBook
@@ -48,7 +49,11 @@ function getBookById(bookId) {
 
 function addReview(bookId, review) {
     var book = gBooks.find(book => book.id === bookId);
-    book.reviews.push(review);
+    if (!book['reviews']) {
+        book['reviews'] = [review];
+    } else {
+        book['review'].push(review);
+    }
     storageService.store(BOOKS_KEY, gBooks);
     return Promise.resolve(book);
 }

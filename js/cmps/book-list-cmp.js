@@ -19,11 +19,11 @@ export default {
         </section>
     `,
     methods: {
-        selectBook(book) {
-            console.log(book);
-            console.log(book.id);
-            this.$emit('selected', book.id);
-        }
+        // selectBook(book) {
+        //     console.log(book);
+        //     console.log(book.id);
+        //     this.$emit('selected', book.id);
+        // }
     },
 
     components: {

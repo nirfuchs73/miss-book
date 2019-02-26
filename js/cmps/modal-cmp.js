@@ -15,9 +15,7 @@ export default {
                     </div>
                     <div class="modal-footer">
                         <slot name="footer">
-                            <button class="modal-default-button" @click="$emit('close')">
-                                OK
-                            </button>
+                            <button class="modal-default-button" v-on:click="emitClose">Close</button>
                         </slot>
                     </div>
                 </div>
@@ -25,5 +23,10 @@ export default {
         </div>
   </transition>
     `,
+    methods: {
+        emitClose() {
+            this.$emit('close');
+        },
+    }
 
 }
