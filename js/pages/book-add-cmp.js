@@ -1,5 +1,7 @@
 import googleBookService from '../services/google-book-service.js';
 import bookService from '../services/book-service.js';
+import userMsg from '../cmps/user-msg-cmp.js';
+import { eventBus, SHOW_MSG } from '../event-bus.js';
 
 export default {
     // props: ['reviews'],
@@ -9,9 +11,6 @@ export default {
             Add Book: <input type="text" placeholder="Search for a book" v-on:keyup.enter="getBooks" v-model="searchTxt"/>
             <button v-on:click="getBooks">Search</button>
         </div>
-        <!--<ul>
-            <li v-for="book in booksToShow">{{book.volumeInfo.title}} <button v-on:click="onAddBook(book)">+</button></li>
-        </ul>-->
         <table border="1" cellpadding="5" class="table table-bordered">
             <tbody>
                 <tr v-for="book in booksToShow">
@@ -20,6 +19,7 @@ export default {
                 </tr>
             </tbody>
         </table>
+        <user-msg></user-msg>
     </section>
     `,
     data() {
@@ -32,18 +32,22 @@ export default {
         getBooks() {
             googleBookService.getBooks(this.searchTxt)
                 .then(books => {
-                    console.log(books.items);
+                    // console.log(books.items);
                     this.books = books.items;
                 });
         },
         onAddBook(book) {
-            console.log(book);
+            // console.log(book);
             bookService.addGoogleBook(book)
                 .then((res) => {
-                    console.log(res);
-                    console.log('Google book was added');
+                    // console.log(res);
+                    // console.log('Google book was added');
+                    var message = { msg: 'Success! Book ' + res.title + 'book was added', type: 'success' };
+                    eventBus.$emit(SHOW_MSG, { ...message });
                 }).catch((res) => {
-                    console.log(res);
+                    var message = { msg: 'Error! ' + res, type: 'error' };
+                    eventBus.$emit(SHOW_MSG, { ...message });
+                    // console.log(res);
                 });
         }
     },
@@ -57,12 +61,11 @@ export default {
 
     },
     created() {
-        // googleBookService.getBooks()
-        //     .then(books => this.books = books);
 
     },
     components: {
         googleBookService,
-        bookService
+        bookService,
+        userMsg
     }
 }

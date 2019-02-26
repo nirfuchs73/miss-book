@@ -7,7 +7,7 @@ export default {
 
 var gBooks;
 
-_createBooks();
+// _createBooks();
 
 function getBooks(searchTxt) {
     // return Promise.resolve(gBooks);

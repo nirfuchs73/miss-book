@@ -23,11 +23,13 @@
 }
 
 .red-bg {
-    color: red;
+    /* color: red; */
+    background-color: orangered;
 }
 
 .green-bg {
-    color: green;
+    /* color: green; */
+    background-color: lightgreen;
 }
 
 .show {
@@ -50,4 +52,13 @@ footer {
     /* table-layout: auto; */
     /* width: 400px; */
     width: fit-content;
+}
+
+.user-msg {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    /* background-color: lightgreen; */
+    padding: 20px;
+    border-radius: 25px;
 }
